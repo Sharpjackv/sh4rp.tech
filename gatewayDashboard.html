@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>sh4rp.tech </title>
+<link rel="stylesheet" type="text/css" href="gateway.css">
+</head>
+    <div class="main">
+        <h1>Gateway Dashboard</h1>
+        yay you made it :D
+    </div>  
+
+    <div class="content" id="ctn" style="overflow-y: scroll;">
+        
+    </div>
+
+    <div class="sidebar">
+        <div class="items">
+            <ul>
+                <li id="bl">Blocklist</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let bl = document.getElementById("bl")
+        let socket = new WebSocket("wss://sh4rp.tech/ws");
+        let buffer = 0
+        socket.onopen = function(e) {
+        console.log('connected')
+        buffer = 1
+        };
+
+
+        function drawbl(){
+        if(buffer == 1){
+            socket.send("1000")
+            socket.onmessage = function(e){
+            
+            
+            
+            let message = e.data;
+            console.log(message)
+            let messageArray = message.split(' ');
+
+            if (messageArray[0] == "1001"){
+                messageArray.push()
+                let ctn = document.getElementById("ctn")
+                let ul = document.createElement("ul")
+                ctn.appendChild(ul)
+                for(let i = 1; i < messageArray.length ; i++){
+                    let li = document.createElement("li")
+                    li.innerText = messageArray[i];
+                    ul.appendChild(li)
+                }                
+            }
+            }
+        }
+        }
+
+
+        
+        bl.addEventListener("mousedown", function (event) {
+            drawbl();
+        });
+    </script>
+</html>

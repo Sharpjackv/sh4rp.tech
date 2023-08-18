@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<title>sh4rp.tech </title>
+<link rel="stylesheet" type="text/css" href="style.css">
+><script> 
+function displayParameters() {
+  const parameters = new URLSearchParams(window.location.search);
+  for (const [key, value] of parameters.entries()) {
+    let paragraphElement = document.createElement("p");
+    if(key == 1){
+    paragraphElement.textContent = `Your admin doesnt allow use of proxys`;
+    document.body.appendChild(paragraphElement);
+    }
+  }
+}
+window.onload = displayParameters;
+</script>
+<html>
+    <h1>You cant Go there</h1>
+    <p></p>
+    <h2>Sorry but that website is blocked by your admins</h2>
+</html>

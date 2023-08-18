@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>sh4rp.tech </title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+    </head><body id="dom"><h1 class="center" style="position:relative; top:20px;" "="">Gateway Admin Console Login</h1>    
+
+    <div class="gallery" style="position:relative; top:150px;">
+        <h3>Username :</h3>
+        <input type="text" id="username">
+        <h3>Password :</h3>
+        <input type="text" id="password"> 
+    </div>
+    <script>
+        let div = document.createElement('div')
+        let dom = document.getElementById("dom")
+        let usernameBox = document.getElementById("username");
+        let passwordBox = document.getElementById("password");
+        let socket = new WebSocket("wss://sh4rp.tech/ws");
+        let connectionBuffer = 0
+        socket.onopen = function(e) {
+        socket.send('1100 ');
+        console.log("[open] Connection established");
+        };
+
+        socket.onmessage = function(e){
+            let message = e.data;
+            let messageArray = message.split(' ');
+
+
+                if (messageArray[0] == '1103'){
+                    if (connectionBuffer == 1){
+                    messageArray.shift()
+                    if (messageArray.toString() == "invalid"){
+                        badLogin();
+                    }
+                    console.log(messageArray.toString());
+                    }
+                    else {
+                        connectionBuffer = connectionBuffer + 1
+                    }
+                }
+
+                if (messageArray[0] == "1104"){
+                    messageArray.shift()
+                    localStorage.setItem("token",messageArray.toString())
+                    console.log("Welcome, your token is : " + messageArray.toString())
+                    document.location.href = "https://sh4rp.tech/gatewayDashboard.html"
+                }
+            
+
+
+        }
+        function badLogin(){
+            usernameBox.value = ""
+            passwordBox.value = ""
+            div.innerHTML = "<p id = 'err'>Bad Login</p>"
+            document.body.prepend(div)
+        }
+
+        function sendLogin(option = 0){
+            if(connectionBuffer = 1){
+                let username = usernameBox.value
+                let password = passwordBox.value
+                socket.send("1101 " + username + " " + password);
+                div.remove()
+            }
+            if(option == 1){
+                let username = usernameBox.value
+                let password = passwordBox.value
+                socket.send("1105 " + username + " " + password);
+            }
+        }
+
+        usernameBox.addEventListener("keydown", function (event) {
+            if (event.keyCode == 13) {
+                 sendLogin();
+            }
+        });
+        passwordBox.addEventListener("keydown", function (event) {
+            if (event.keyCode == 13) {
+                 sendLogin();
+            }
+        });
+    </script>
+</body></html>
