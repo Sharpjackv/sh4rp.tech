@@ -11,7 +11,7 @@ html,body {
 
 .navbar {
     top:0;
-    background-color: #161D27;
+    background-color: #141b24;
     width: 100vw;
     height:5%;
     position:absolute;
@@ -31,7 +31,7 @@ html,body {
     width: 0%;
     right:0;
     position: fixed;
-    background-color: #161D27;
+    background-color: #141b24;
     z-index: 1000;
     overflow: hidden;
 }
@@ -56,7 +56,8 @@ html,body {
 }
 
 #menu-links a {
-    color: #5e7ca6;
+    color: #ddeafe;
+    text-decoration: none;
 }
 
 .wrapper {
@@ -86,12 +87,12 @@ html,body {
     background-color: #07459d;
     width: 25%;
     border-radius: 15px;
-    padding: 1%;
+    padding: .5%;
     align-items: center;
 }
 
 .caption p {
-    width:90%
+    width:90%;
 }
 
 .project-link {
@@ -101,7 +102,7 @@ html,body {
     text-decoration: none;
     color: #ddeafe;
     text-align: center;
-    width:92%;
+    width:fit-content;
     margin-top: auto;
 }
 
