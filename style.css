@@ -1,17 +1,35 @@
+:root {
+    --bg-color: #161D27;
+    --primary-color: #07459d;
+    --secondary-color: #141b25;
+    --text-color: #dceafe;
+    --menu-icon: url('images/menu-light.svg');  
+    --moon-icon: url('images/moon-filled.svg');  
+}
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html,body {
-    color: #ddeafe;
-    background-color: #161D27;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     text-align: center;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
 
+@media (prefers-color-scheme: light) {
+}
+
+@media (prefers-color-scheme: dark) {
+}
+
+
 .navbar {
     top:0;
-    background-color: #141b24;
+    background-color: var(--secondary-color);
     width: 100vw;
     height:5%;
     position:absolute;
@@ -20,10 +38,19 @@ html,body {
     align-items: center;
     font-size: x-large;
     z-index: 2000;
+    gap:1%;
 }
 
 #menu-button {
     margin-right:1%;
+}
+
+#menu-button::after {
+    content:var(--menu-icon)
+}
+
+#theme-button::after {
+    content:var(--moon-icon);
 }
 
 #menu {
@@ -31,7 +58,7 @@ html,body {
     width: 0%;
     right:0;
     position: fixed;
-    background-color: #141b24;
+    background-color: var(--secondary-color);
     z-index: 1000;
     overflow: hidden;
 }
@@ -56,7 +83,7 @@ html,body {
 }
 
 #menu-links a {
-    color: #ddeafe;
+    color: var(--text-color);
     text-decoration: none;
 }
 
@@ -84,7 +111,7 @@ html,body {
 .caption {
     display: flex;
     flex-direction: column;
-    background-color: #07459d;
+    background-color: var(--primary-color);
     width: 25%;
     border-radius: 15px;
     padding: .5%;
@@ -98,9 +125,9 @@ html,body {
 .project-link {
     border-radius: 5px;
     padding: 4%;
-    background-color: #141b24;
+    background-color: var(--secondary-color);
     text-decoration: none;
-    color: #ddeafe;
+    color: var(--text-color);
     text-align: center;
     width:fit-content;
     margin-top: auto;
