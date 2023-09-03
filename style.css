@@ -3,7 +3,7 @@
     --primary-color: #07459d;
     --secondary-color: #141b25;
     --text-color: #dceafe;
-    --menu-icon: url('images/menu-light.svg');  
+    --menu-icon: url('images/menu-dark.svg');  
     --moon-icon: url('images/moon-filled.svg');  
 }
 
@@ -20,12 +20,27 @@ html,body {
     padding: 0;
 }
 
-@media (prefers-color-scheme: light) {
-}
-
 @media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #161D27;
+        --primary-color: #07459d;
+        --secondary-color: #141b25;
+        --text-color: #dceafe;
+        --menu-icon: url('images/menu-dark.svg');  
+        --moon-icon: url('images/moon-filled.svg');  
+        } 
 }
 
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-color: #e2e7ef;
+        --secondary-color: #e2e7ef;
+        --text-color: #161D27;
+        --menu-icon: url('images/menu-light.svg');  
+        --moon-icon: url('images/moon.svg');  
+    }
+    
+}
 
 .navbar {
     top:0;
@@ -94,6 +109,8 @@ html,body {
     position: fixed;
     margin-top: 2%;
     align-items: center;
+    height: 100vh;
+    overflow-y:scroll;
 }
 
 .profile-image {
@@ -133,3 +150,27 @@ html,body {
     margin-top: auto;
 }
 
+@media only screen and (max-width: 600px) {
+    .gallery {
+        align-items: center;
+        flex-direction: column;
+        gap: 5%;
+    }
+    .caption {
+        width: 90%;
+        margin-top: 5%;
+    }
+    .wrapper {
+        margin-top: 5%;
+    }
+    @keyframes slide {
+        0% {width:0}
+        100% {width: 55%}
+    }
+    
+    @keyframes slideback {
+        0% {width: 55% }
+        100% {width:0}
+    }    
+    
+}

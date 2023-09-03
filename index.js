@@ -25,7 +25,12 @@ menu = document.getElementById('menu');
 document.getElementById('menu-button').addEventListener("click", (event) => {
     if (menuButton==false) {
         menu.style.animation="slide 500ms";
-        menu.style.width="20%";
+        if (window.matchMedia("(max-width: 600px)").matches) {
+            menu.style.width="55%";
+        }
+        else {
+            menu.style.width="20%";
+        }
         menuButton=true;
     }
     else {
@@ -47,8 +52,8 @@ let darkSecondaryColor="#141b25"
 let darkTextColor="#dceafe"
 
 //light theme color scheme
-lightBgColor= "#dceafe";
-lightSecondaryColor= "#e2e7ef";
+lightBgColor= "#e2e7ef";
+lightSecondaryColor= "#dee4ed";
 lightTextColor= "#161D27";    
 
 function setLight() {
