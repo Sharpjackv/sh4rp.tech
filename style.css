@@ -7,8 +7,6 @@
     --moon-icon: url('images/moon-filled.svg');  
 }
 
-
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html,body {
@@ -43,35 +41,35 @@ html,body {
 }
 
 .navbar {
-    top:0;
+    top: 0;
     background-color: var(--secondary-color);
     width: 100vw;
-    height:5%;
-    position:absolute;
+    height: 5%;
+    position: absolute;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     font-size: x-large;
     z-index: 2000;
-    gap:1%;
+    gap: 1%;
 }
 
 #menu-button {
-    margin-right:1%;
+    margin-right: 1%;
 }
 
 #menu-button::after {
-    content:var(--menu-icon)
+    content: var(--menu-icon);
 }
 
 #theme-button::after {
-    content:var(--moon-icon);
+    content: var(--moon-icon);
 }
 
 #menu {
     height: 100%;
     width: 0%;
-    right:0;
+    right: 0;
     position: fixed;
     background-color: var(--secondary-color);
     z-index: 1000;
@@ -110,11 +108,11 @@ html,body {
     margin-top: 2%;
     align-items: center;
     height: 100vh;
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
 .profile-image {
-    width:15%;
+    width: 15%;
     border-radius: 50%;
 }
       
@@ -137,7 +135,7 @@ html,body {
 }
 
 .caption p {
-    width:90%;
+    width: 90%;
 }
 
 .project-link {
@@ -147,11 +145,15 @@ html,body {
     text-decoration: none;
     color: var(--text-color);
     text-align: center;
-    width:fit-content;
+    width: fit-content;
     margin-top: auto;
+    white-space: nowrap;
 }
 
 @media only screen and (max-width: 600px) {
+    .wrapper {
+        margin-top: 5%;
+    }
     .gallery {
         align-items: center;
         flex-direction: column;
@@ -160,18 +162,36 @@ html,body {
     .caption {
         width: 90%;
         margin-top: 5%;
+        font-size: large;
     }
-    .wrapper {
-        margin-top: 5%;
+    .project-link  {
+        margin-bottom: 1%;
+    }
+    .bio {
+        margin: 1% 1% 0 1%;
+    }
+    .profile-image {
+        width: 35%;
+    }
+    .navbar {
+        gap: 5%;
+    }
+    #theme-button {
+        transform: scale(1.5);
+    }
+    #menu-button {
+        transform: scale(1.5);
+        margin-right: 4%;
     }
     @keyframes slide {
-        0% {width:0}
+        0% {width: 0}
         100% {width: 55%}
     }
-    
     @keyframes slideback {
-        0% {width: 55% }
-        100% {width:0}
-    }    
-    
+        0% {width: 55%}
+        100% {width: 0}
+    }
+    #menu-links {
+        font-size: larger;
+    }
 }
