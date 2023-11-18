@@ -16,7 +16,7 @@
         let dom = document.getElementById("dom")
         let usernameBox = document.getElementById("username");
         let passwordBox = document.getElementById("password");
-        let socket = new WebSocket("wss://sh4rp.tech/ws");
+        let socket = new WebSocket("wss://home.sh4rp.tech/ws");
         let connectionBuffer = 0
         socket.onopen = function(e) {
         socket.send('1100 ');
@@ -45,7 +45,7 @@
                     messageArray.shift()
                     localStorage.setItem("token",messageArray.toString())
                     console.log("Welcome, your token is : " + messageArray.toString())
-                    document.location.href = "https://sh4rp.tech/gatewayDashboard.html"
+                    document.location.href = "https://home.sh4rp.tech/gatewayDashboard.html"
                 }
             
 

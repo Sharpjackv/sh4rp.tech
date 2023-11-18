@@ -3,63 +3,120 @@
 <meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>sh4rp.tech </title>
 <link rel="stylesheet" type="text/css" href="gateway.css">
 </head>
-    <div class="main">
-        <h1>Gateway Dashboard</h1>
-        yay you made it :D
-    </div>  
-
-    <div class="content" id="ctn" style="overflow-y: scroll;">
-        
+    <div class = "navbar"><li id="home"><img src="https://home.sh4rp.tech/images/gateway_logo.png"></li><li id = "users"><p>Students</p></li><li><p>Blocklist</p></li><li><p>Analytics</p></li><li><p>Server</p></li>
     </div>
-
-    <div class="sidebar">
-        <div class="items">
-            <ul>
-                <li id="bl">Blocklist</li>
-            </ul>
+    <div class = "info" id = "info">
+        <div class="child">
+            <div class="home"><div><h1>Home</h1><div id="date">Date</div></div><div id="status">Server Status : connecting...</div></div>
         </div>
     </div>
 
+    
+
+
     <script>
-        let bl = document.getElementById("bl")
-        let socket = new WebSocket("wss://sh4rp.tech/ws");
+        n =  new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+        document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+
+        let wsStatus = "down"
+        let LSname = "[placeholder]"
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+
+
+        const userToken = localStorage.getItem("token");
+        let usergrab = document.getElementById("users");
+        let socket = new WebSocket("wss://home.sh4rp.tech/ws");
         let buffer = 0
         socket.onopen = function(e) {
         console.log('connected')
+        wsStatus = "up"
+        document.getElementById("status").innerHTML = "Server Status : Connected"
         buffer = 1
         };
 
-
-        function drawbl(){
-        if(buffer == 1){
-            socket.send("1000")
-            socket.onmessage = function(e){
-            
-            
-            
+        socket.onmessage = function(e) {
             let message = e.data;
-            console.log(message)
             let messageArray = message.split(' ');
+            let messageArray2 = message.split(";")
 
-            if (messageArray[0] == "1001"){
-                messageArray.push()
-                let ctn = document.getElementById("ctn")
-                let ul = document.createElement("ul")
-                ctn.appendChild(ul)
-                for(let i = 1; i < messageArray.length ; i++){
-                    let li = document.createElement("li")
-                    li.innerText = messageArray[i];
-                    ul.appendChild(li)
-                }                
+            if(messageArray[0] == 1014){
+                drawuserl(messageArray[1]);
             }
+            if(messageArray2[0] == 1016){
+                drawuserh(messageArray2[1])
             }
         }
+
+
+        function drawuserh(data){
+            let info = document.getElementById("info")
+            info.innerHTML = ""
+            let child = document.createElement("div")
+            child.classList.add("child");
+            info.appendChild(child);
+            let dataAr = data.split("\n")
+            let reload = document.createElement("li")
+            reload.innerHTML= '<div class="reload"><img src="./images/reload.png"></div>';
+            reload.addEventListener("click", function(event) {
+                socket.send("1015 " + localStorage.getItem("token") + " " + LSname)
+            });
+            child.appendChild(reload);
+            let name = document.createElement("li");
+            name.innerHTML = '<li><div class="overide">'+LSname+'</div></li>'
+            child.appendChild(name)
+            
+            for(let i = 0; i < dataAr.length; i++){
+                let eventP = dataAr[i].split(" ")
+                let event = document.createElement("li")
+                if(eventP[0].length > 55){
+                    eventP[0] = eventP[0].slice(0,55)
+                }
+                event.innerHTML = '<li><div><div>'+ eventP[0] +'</div><div class="date">'+ eventP[1] + '<br>' + eventP[2] +'</div></div></li>'
+                child.append(event)
+            }
         }
 
+        function drawuserl(data){
+            let info = document.getElementById("info")
+            info.innerHTML = ""
+            let child = document.createElement("div")
+            child.classList.add("child");
+            info.appendChild(child);
+            let dataAr = data.split(";")
 
-        
-        bl.addEventListener("mousedown", function (event) {
-            drawbl();
+
+            for(let i = 0; i < dataAr.length ;i ++){
+                let user = document.createElement("li")
+                user.innerHTML = '<div><d>' + dataAr[i] + '</d><img src="./images/arrow.png"></div>'
+                user.addEventListener("click", function (event){
+                    let path = dataAr[i]
+                    let murm = path.split("/")
+                    let username = murm[murm.length - 1]
+                    socket.send("1015 " + localStorage.getItem("token") + " " + username)
+                    LSname = username;
+                });
+                child.appendChild(user);
+            }
+        }
+
+        usergrab.addEventListener("mousedown", function (event) {
+            console.log(("1013 " + localStorage.getItem("token")))
+            socket.send(("1013 " + localStorage.getItem("token")))
         });
+
+        window.addEventListener('resize', () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+
+        document.getElementById("home").addEventListener("click", function(event){
+            location.reload()
+        })
     </script>
 </html>

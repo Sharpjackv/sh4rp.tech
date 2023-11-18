@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<title>sh4rp.tech </title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<h1>Gateway Blog</h1>
+<h3>sharp Jack</h3>
+<br>
+<div class="paragraph">
+<p>
+Gateway is and indie developed web filter for enterprise use in the K-12 educational enviroment, this page here will document the inner workings of the extension and the day to day work being done.
+</p>
+<h1 class="date">09/05/23 |<c> Websocket api</c></h1>
+<p>The backend api for the extension uses wss:// for communication to the server, sending strings back and forth for communication. A normal request/response pair will look something like this<br>
+<br>
+<div class="codeblock">
+request :
+1000 john@example.com <br>
+response : 1001 [blocklist]
+</div>
+<br>
+<p>What Just happened was, the client made a hello request to the server, the server recognizes this because of the 1000 message code that precedes the data in the string, then the client appends the users email behind the code. The Backend server is setup to respond to hello requests by serving the full blocklist so that the extension can store it localy. Now while I wish I could say that I had a good naming convention for all the communication codes, I just made it up as I went along. All of the current codes are as follows.</p><br>
+<br>
+<div class="codeblock">
+Client codes:<br>
+1000 <g># this is the hello ping sent at startup</g><br>
+1002 <g># this code is used for sending activity to be logged</g><br>
+1004 <g># this is sent when the client has completed a db update</g><br>
+1005 <g># used for querying the blocklist databese, will cause 1006 to be returned</g><br>
+<br>
+Server codes:<br>
+1001 <g># this triggers the update of the blocklist database cleint side.</g><br>
+1006 # <g>this will be sent in response to 1005, it will cause the client to block a tab specified by domain</g><br>
+</div>
+<br>
+<p>am purposefully ommiting the admin pannel api for security reasonsons. It follows the same schema, but it uses a user tokken assigned on login and stored on the server for verification purposes. The admin api has the ability to update the blocklist or whitelist, query user history and manage config files on the server.</p><br>
+<br>
+<p>Thats all for now, not very complicated, but it shouldnt be.</p>
+<br><br><div class="line"></div><br>
+</p>
+</div>

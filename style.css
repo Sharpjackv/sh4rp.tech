@@ -4,7 +4,8 @@
     --secondary-color: #141b25;
     --text-color: #dceafe;
     --menu-icon: url('images/menu-dark.svg');  
-    --moon-icon: url('images/moon-filled.svg');  
+    --moon-icon: url('images/moon-filled.svg');
+    --gateway-logo: url('images/gateway-logo.svg');
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -57,6 +58,12 @@ html,body {
 #menu-button {
     margin-right: 1%;
 }
+
+#gateway-logo{
+    width:80%;
+    height:20%;
+}
+
 
 #menu-button::after {
     content: var(--menu-icon);
@@ -138,6 +145,39 @@ html,body {
     width: 90%;
 }
 
+html body h2{
+    font-size: 300%;
+}
+
+html body h3{
+    font-size: 200%;
+}
+
+html body p{
+    font-size: 150%;
+}
+
+.nvb{
+    background-color:#0a0b0c;
+    height: 50px;
+    width: 100%;
+    border-radius: 0%;
+    display: flex;
+    align-items: center; 
+}
+
+.nvb li{
+    padding: 5px;
+    list-style-type: none;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nvb li a{
+    color: var(--text-color);
+}
+
+
 .project-link {
     border-radius: 5px;
     padding: 4%;
@@ -149,6 +189,54 @@ html,body {
     margin-top: auto;
     white-space: nowrap;
 }
+
+.paragraph {
+    text-align: left;
+    text-indent: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    }
+    
+    
+    .codeblock {
+    border: #2f3237;
+    border-style: solid;
+    border-radius: 15px;
+    padding: 15px;
+    text-indent: 0%;
+    background-color: #151719;
+    width: 80%;
+    }
+    
+    
+    .date{
+    text-indent: 0%;
+    padding-left: 0%;
+    }
+    
+    
+    g {
+    color: #737b88;
+    }
+    
+    
+    c {
+    font-size: 35px;
+    }
+    
+    
+    .line {
+    position: absolute;
+    transform: translate(-90%, -90%);
+    left: 90%;
+    border-style: solid;
+    border-color: #b5bdca;
+    width: 99.9%;
+    height: 0px;
+    align-items: center;
+    }
+    
+
 
 @media only screen and (max-width: 600px) {
     .wrapper {
@@ -194,4 +282,4 @@ html,body {
     #menu-links {
         font-size: larger;
     }
-}
+} 
